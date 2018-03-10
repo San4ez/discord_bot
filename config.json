@@ -1,0 +1,9 @@
+{
+    "BOT_DESCRIPTION": "",
+    "BOT_TOKEN": "",
+    "COMMAND_PREFIX": "?",
+    "LOG_FILENAME": "bot.log",
+    "PATH":"",
+    "GOOGLE_TOKEN":"",
+    "RSS_FEED": ["rss","rss"]
+}
