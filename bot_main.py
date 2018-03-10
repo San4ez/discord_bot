@@ -125,22 +125,22 @@ async def mus_pause(ctx):
 	if hasattr(mus, 'mus_player'):
 		if mus.mus_player.is_playing():
 			mus.mus_player.pause()
-			await client.send_message(ctx.message.channel, ' Пауза')
+			await client.send_message(ctx.message.channel, ' Pause')
 	if hasattr(yt, 'yt_player'):
 		if yt.yt_player.is_playing():
 			yt.yt_player.pause()
-			await client.send_message(ctx.message.channel, yt.yt_player.title + ' Пауза')
+			await client.send_message(ctx.message.channel, yt.yt_player.title + ' Pause')
 
 @client.command(pass_context=True)
 async def mus_resume(ctx):
 	if hasattr(mus, 'mus_player'):
 		if not mus.mus_player.is_playing():
 			mus.mus_player.resume()
-			await client.send_message(ctx.message.channel, ' Продолжение')
+			await client.send_message(ctx.message.channel, ' Сontinue')
 	if hasattr(yt, 'yt_player'):
 		if not yt.yt_player.is_playing():
 			yt.yt_player.resume()
-			await client.send_message(ctx.message.channel, yt.yt_player.title + ' Продолжение')
+			await client.send_message(ctx.message.channel, yt.yt_player.title + ' Сontinue')
 
 @client.command(pass_context=True)
 async def mus_stop(ctx):
@@ -148,12 +148,12 @@ async def mus_stop(ctx):
 		if mus.mus_player.is_playing():
 			mus.mus_player.stop()
 			await voice.disconnect()
-			await client.send_message(ctx.message.channel, ' Продолжение')
+			await client.send_message(ctx.message.channel, ' Сontinue')
 	if hasattr(yt, 'yt_player'):
 		if yt.yt_player.is_playing():
 			yt.yt_player.stop()
 			await voice.disconnect()
-			await client.send_message(ctx.message.channel, yt.yt_player.title + ' Продолжение')
+			await client.send_message(ctx.message.channel, yt.yt_player.title + ' сontinue')
 
 ##########################################################
 
@@ -161,7 +161,7 @@ async def mus_stop(ctx):
 ##################################################################
 @client.command(pass_context=True)
 async def news_msk(self):
-    all_news = feedparser.parse('https://news.yandex.ru/Moscow/index.rss')#добавить проверку еси вернётся пустой результат!!
+    all_news = feedparser.parse('https://news.yandex.ru/Moscow/index.rss')
     #all_news = feedparser.parse('https://geektimes.ru/rss/hubs/all/')
     d = {}
     count = 0
@@ -169,7 +169,7 @@ async def news_msk(self):
         d["news_msk#" + str(count) ] = {"Title" : news.title, "Link" : news.link}
         count = count + 1
     count = 0
-    for count in range(len(all_news)): #сделать счетчик на количество новостей в словаре!!
+    for count in range(len(all_news)):
        	await client.say(d['news_msk#'+ str(count)]['Title'] + '\n' + short_links(d['news_msk#' + str(count)]['Link']) + '\n')
        	count = count + 1
     d.clear()
@@ -187,7 +187,7 @@ async def news_found(self, arg):
 	if (len(news) == 0) or (news == 1):
 		await client.say('News on request yet, please try again later! Or, specify the word to search for.')
 		return 0
-	await client.say('__Всего новостей: ' + str(len(news)) + '__')
+	await client.say('__All news: ' + str(len(news)) + '__')
 	for count in range(len(news)):
 		await client.say(news['news#'+ str(count)]['Title'] + '\n' +
 			short_links(news['news#' + str(count)]['Link']) + '\n')
@@ -220,6 +220,21 @@ def short_links(link):
 		return link
 
 #news yandex
+##################################################################
+
+#тестовые функции
+##################################################################
+def func1():
+    if not hasattr(func1, '_state'):  # инициализация значения, если имеет атрибут 
+        func1._state = 0
+    func1._state = func1._state + 1
+    print(func1._state)
+
+@client.command(pass_context=True)
+async def test(ctx):
+	#print(config['RSS_FEED'])
+	for feed in config['RSS_FEED']:
+		print(feed)
 ##################################################################
 
 # output time and weather
